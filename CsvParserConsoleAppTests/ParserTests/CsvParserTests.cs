@@ -5,48 +5,62 @@ using CsvParserConsoleApp.Services;
 using FluentAssertions;
 using Moq;
 
-namespace CsvParserConsoleAppTests.ControllerTests
+namespace CsvParserConsoleAppTests.ParserTests
 {
-    public class ParserControllerTests
+    public class CsvParserTests
     {
-        private ParserManagementController? _controller;
-        private Mock<IParserManagementService>? _mockParserManagementService;
-        private Mock<IParser>? _parser;
+        private IParser? _parser;
         private List<string> _strPeopleTestData;
         private string _delimeter;
 
-        [SetUp] 
+        [SetUp]
         public void Setup()
         {
+            _parser = new CsvParser();
             _strPeopleTestData = GetStringTestData();
             _delimeter = ",";
-            _mockParserManagementService = new Mock<IParserManagementService>();
-            _parser = new Mock<IParser>();
-            _controller = new ParserManagementController(_mockParserManagementService.Object, _parser.Object, _delimeter);
         }
 
         [Test]
-        public void GetRawDataFromFile_Returns_A_List_Of_Strings()
+        public void RunParser_Returns_A_List_Of_Type_T_Person()
         {
 
-            var result = _controller!.GetRawDataFromFile();
-
-            result.Should().BeOfType(typeof(List<string>));
-            result.Count.Should().Be(501);
-        }
-
-        [Test]
-        public void Parse_Correctly_Parses_List_Of_Strings_And_Returns_List_Of_Person()
-        {
-
-            _mockParserManagementService!.Setup(b => b.RunParser(_parser!.Object, _strPeopleTestData, _delimeter)).Returns(GetTestModelPersonData());
-
-            var result = _controller!.Parse(_strPeopleTestData);
+            var result = _parser!.Parse<Person>(_strPeopleTestData, _delimeter);
 
             result.Should().BeOfType(typeof(List<Person>));
             result.Count.Should().Be(5);
         }
 
+        [Test]
+        public void GetHeaders_Returns_A_List_Of_Headers()
+        {
+
+            var result = _parser!.GetHeaders(_strPeopleTestData, _delimeter);
+
+            result.Should().BeOfType(typeof(List<string>));
+            result.Count.Should().Be(10);
+        }
+
+        private List<string> GetTestHeaders()
+        {
+            return new List<string>
+            {
+                {
+                        @"Firstname,
+                        Lastname,
+                        Companyname,
+                        Address,
+                        City,
+                        County,
+                        Postal,
+                        Phone1,
+                        Phone2,
+                        Email,
+                        Web"
+                    },
+            };
+        }
+         
         private List<string> GetStringTestData()
         {
             return new List<string>

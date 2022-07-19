@@ -5,43 +5,32 @@ using CsvParserConsoleApp.Services;
 using FluentAssertions;
 using Moq;
 
-namespace CsvParserConsoleAppTests.ControllerTests
+namespace CsvParserConsoleAppTests.ServicesTests
 {
-    public class ParserControllerTests
+    public class ParserServicesTests
     {
         private ParserManagementController? _controller;
-        private Mock<IParserManagementService>? _mockParserManagementService;
+        private ParserManagementService? _parserManagementService;
         private Mock<IParser>? _parser;
         private List<string> _strPeopleTestData;
         private string _delimeter;
 
-        [SetUp] 
+        [SetUp]
         public void Setup()
         {
             _strPeopleTestData = GetStringTestData();
             _delimeter = ",";
-            _mockParserManagementService = new Mock<IParserManagementService>();
             _parser = new Mock<IParser>();
-            _controller = new ParserManagementController(_mockParserManagementService.Object, _parser.Object, _delimeter);
+            _parserManagementService = new();
         }
 
         [Test]
-        public void GetRawDataFromFile_Returns_A_List_Of_Strings()
+        public void RunParser_Returns_A_List_Of_Type_T_Person()
         {
 
-            var result = _controller!.GetRawDataFromFile();
+            _parser!.Setup(b => b.Parse<Person>(_strPeopleTestData, _delimeter)).Returns(GetTestModelPersonData());
 
-            result.Should().BeOfType(typeof(List<string>));
-            result.Count.Should().Be(501);
-        }
-
-        [Test]
-        public void Parse_Correctly_Parses_List_Of_Strings_And_Returns_List_Of_Person()
-        {
-
-            _mockParserManagementService!.Setup(b => b.RunParser(_parser!.Object, _strPeopleTestData, _delimeter)).Returns(GetTestModelPersonData());
-
-            var result = _controller!.Parse(_strPeopleTestData);
+            var result = _parserManagementService!.RunParser(_parser!.Object, _strPeopleTestData, _delimeter);
 
             result.Should().BeOfType(typeof(List<Person>));
             result.Count.Should().Be(5);
