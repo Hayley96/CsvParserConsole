@@ -14,10 +14,16 @@ namespace CsvParserConsoleApp.Parser
         {
             List<T> list = new();
             var headers = GetHeaders(fileData, delimeter);
+            var properties = GetSystemPropertiesOfT<T>();
             return list;
         }
 
         public List<string> GetHeaders(List<string> lines, string delimeter) =>
-            lines.First().Replace("_", "").Split(delimeter).ToList();
+            lines.First().Replace("_", "").Split(delimeter).Select(h => h.Substring(0, 1).ToUpper() + h.Substring(1)).ToList();
+
+        public List<PropertyInfo> GetSystemPropertiesOfT<T>()
+        {
+            return typeof(T).GetProperties(BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance).ToList();
+        }
     }
 }

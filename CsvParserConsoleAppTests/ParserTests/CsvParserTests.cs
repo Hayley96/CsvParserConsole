@@ -4,6 +4,7 @@ using CsvParserConsoleApp.Parser;
 using CsvParserConsoleApp.Services;
 using FluentAssertions;
 using Moq;
+using System.Reflection;
 
 namespace CsvParserConsoleAppTests.ParserTests
 {
@@ -39,6 +40,14 @@ namespace CsvParserConsoleAppTests.ParserTests
 
             result.Should().BeOfType(typeof(List<string>));
             result.Count.Should().Be(10);
+        }
+
+        [Test]
+        public void GetSystemPropertiesOfT_returns_All_Properties_Of_T()
+        {
+            List<PropertyInfo> result = _parser!.GetSystemPropertiesOfT<Person>();
+
+            result.Count.Should().Be(11);
         }
 
         private List<string> GetTestHeaders()
