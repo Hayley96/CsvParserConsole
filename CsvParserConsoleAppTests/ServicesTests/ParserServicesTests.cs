@@ -10,7 +10,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
 {
     public class ParserServicesTests
     {
-        private ParserManagementService _parserManagementService;
+        private ParserManagerService _parserManagementService;
         private Mock<IParser>? _parser;
         private List<string> _strPeopleTestData;
         private List<Person> _ObjPeopleTestData;

@@ -11,7 +11,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
     public class ParserControllerTests
     {
         private ParserManagementController? _controller;
-        private Mock<IParserManagementService>? _mockParserManagementService;
+        private Mock<IParserManagerService>? _mockParserManagementService;
         private Mock<IQueryManagerService>? _mockQueryManagerService;
         private Mock<IParser>? _mockParser;
         private List<string> _strPeopleTestData;
@@ -24,7 +24,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
             _strPeopleTestData = ListTestData.GetStringTestData();
             _ObjPeopleTestData = ListTestData.GetTestModelPersonData();
             _delimeter = ",";
-            _mockParserManagementService = new Mock<IParserManagementService>();
+            _mockParserManagementService = new Mock<IParserManagerService>();
             _mockQueryManagerService = new Mock<IQueryManagerService>();
             _mockParser = new Mock<IParser>();
             _controller = new ParserManagementController(_mockParserManagementService.Object, _mockQueryManagerService.Object, 

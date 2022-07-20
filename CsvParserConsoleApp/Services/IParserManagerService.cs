@@ -3,7 +3,7 @@ using CsvParserConsoleApp.Parser;
 
 namespace CsvParserConsoleApp.Services
 {
-    public interface IParserManagementService
+    public interface IParserManagerService
     {
         List<Person> RunParser(IParser parser, List<string> strPeople, string delimeter);
     }
