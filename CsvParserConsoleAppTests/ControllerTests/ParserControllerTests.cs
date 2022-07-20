@@ -100,6 +100,18 @@ namespace CsvParserConsoleAppTests.ControllerTests
             result.Count().Should().Be(expectedResult.Count);
         }
 
+        [Test]
+        public void GetPeopleWhoseURLLengthGreaterThan35_Returns_List_of_Objects()
+        {
+            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Web!.Length>35).ToList();
+            _mockQueryManagerService!.Setup(b => b.ReturnPeopleWhoseURLIsLongerThan35Chars(_ObjPeopleTestData)).Returns(expectedResult);
+
+            var result = _controller!.QueryGetPeopleWhoseURLLengthGreaterThan35(_ObjPeopleTestData);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count().Should().Be(expectedResult.Count);
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>

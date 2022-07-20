@@ -8,5 +8,6 @@ namespace CsvParserConsoleApp.Services
         List<Person> ReturnPeopleWithEsqInCompanyName(List<Person> people);
         List<Person> ReturnPeopleWhoLiveInDerbyshire(List<Person> people);
         List<Person> ReturnPeopleWhoseHouseNumberIsThreeDigits(List<Person> people);
+        List<Person> ReturnPeopleWhoseURLIsLongerThan35Chars(List<Person> people);
     }
 }

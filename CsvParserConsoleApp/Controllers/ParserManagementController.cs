@@ -52,5 +52,10 @@ namespace CsvParserConsoleApp.Controllers
         {
             return _queryManagerService!.ReturnPeopleWhoseHouseNumberIsThreeDigits(people);
         }
+
+        public List<Person> QueryGetPeopleWhoseURLLengthGreaterThan35(List<Person> people)
+        {
+            return _queryManagerService!.ReturnPeopleWhoseURLIsLongerThan35Chars(people);
+        }
     }
 }
