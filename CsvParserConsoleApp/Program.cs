@@ -2,6 +2,7 @@
 using CsvParserConsoleApp.Controllers;
 using CsvParserConsoleApp.Parser;
 using CsvParserConsoleApp.Services;
+using System.Reflection;
 
 IParser parser;
 parser = new CsvParser();
@@ -12,12 +13,4 @@ ParserManagementController controller = new(new ParserManagementService(), new C
 var PersonRawData = controller.GetRawDataFromFile();
 var peopleresult = controller.Parse(PersonRawData);
 
-//PersonRawData.ForEach(x => Console.WriteLine(x));
-//peopleresult.ForEach(x => Console.WriteLine(x));
-//Console.WriteLine(peopleresult.Count);
-
-var headers = parser.GetHeaders(PersonRawData, delimeter);
-headers.ForEach(x => Console.WriteLine(x));
-
-var props = parser.GetSystemPropertiesOfT<Person>();
-props.ForEach(x => Console.WriteLine(x));
+peopleresult.ForEach(person => Console.WriteLine(person.Firstname));

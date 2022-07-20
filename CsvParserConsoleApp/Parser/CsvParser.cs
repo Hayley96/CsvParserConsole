@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-
+using System.Text.RegularExpressions;
 
 namespace CsvParserConsoleApp.Parser
 {
@@ -10,6 +10,7 @@ namespace CsvParserConsoleApp.Parser
             List<T> list = new();
             var headers = GetHeaders(fileData, delimeter);
             var properties = GetSystemPropertiesOfT<T>();
+            fileData.Skip(1).ToList().ForEach(line => list.Add(MapValuesToTypeTProperties<T>(line, delimeter, headers, properties)));
             return list;
         }
 
@@ -23,5 +24,24 @@ namespace CsvParserConsoleApp.Parser
 
         public T Create<T>() where T : new() =>
             new T();
+
+        public T MapValuesToTypeTProperties<T>(string line, string delimeter, List<string> columnNames, List<PropertyInfo> properties) where T : new()
+        {
+            T obj = Create<T>();
+            List<string> cells = new();
+            var fieldValues = Regex.Split(line, $"{delimeter}(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)").ToList();
+            fieldValues.ForEach(field => cells.Add(field.Replace("\"", "")));
+            int index = 0;
+
+            columnNames.ForEach(column =>
+            {
+                var prop = properties.SingleOrDefault(p => p.Name == column);
+                Type propertyType = prop!.PropertyType;
+                var value = cells[index++];
+                prop.SetValue(obj, Convert.ChangeType(value, propertyType));
+            });
+
+            return obj;
+        }
     }
 }
