@@ -64,6 +64,18 @@ namespace CsvParserConsoleAppTests.ControllerTests
             result.Count.Should().Be(5);
         }
 
+        [Test]
+        public void QueryGetPeopleWithCompanyNameContainingEsq_Returns_List_of_Objects()
+        {
+            List<Person> resultsinglerecord = _ObjPeopleTestData.Where(p => p.Firstname == "France").ToList();
+            _mockQueryManagerService!.Setup(b => b.ReturnPeopleWithEsqInCompanyName(_ObjPeopleTestData)).Returns(resultsinglerecord);
+
+            var result = _controller!.QueryGetPeopleWithCompanyNameContainingEsq(_ObjPeopleTestData);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count().Should().Be(1);
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>

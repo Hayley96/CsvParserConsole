@@ -37,5 +37,10 @@ namespace CsvParserConsoleApp.Controllers
         {
             return _queryManagerService!.ReturnAllPeople(people);
         }
+
+        public List<Person> QueryGetPeopleWithCompanyNameContainingEsq(List<Person> people)
+        {
+            return _queryManagerService!.ReturnPeopleWithEsqInCompanyName(people);
+        }
     }
 }

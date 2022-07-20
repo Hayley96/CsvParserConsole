@@ -31,7 +31,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
         {
             var data = GetTestModelPersonData();
 
-            var people = queryManagerService.GetPeopleWithEsqInCompanyName(data);
+            var people = queryManagerService.ReturnPeopleWithEsqInCompanyName(data);
 
             Assert.That(people.Count, Is.EqualTo(1));
         }
