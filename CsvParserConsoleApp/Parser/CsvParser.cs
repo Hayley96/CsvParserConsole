@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+
 
 namespace CsvParserConsoleApp.Parser
 {
@@ -23,7 +18,10 @@ namespace CsvParserConsoleApp.Parser
 
         public List<PropertyInfo> GetSystemPropertiesOfT<T>()
         {
-            return typeof(T).GetProperties(BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance).ToList();
+            return typeof(T).GetProperties().ToList();
         }
+
+        public T Create<T>() where T : new() =>
+            new T();
     }
 }

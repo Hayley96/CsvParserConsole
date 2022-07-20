@@ -50,6 +50,14 @@ namespace CsvParserConsoleAppTests.ParserTests
             result.Count.Should().Be(11);
         }
 
+        [Test]
+        public void Create_returns_An_Instance_Of_T()
+        {
+            var result = _parser!.Create<Person>();
+
+            Assert.That(result, Is.InstanceOf<Person>());
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>

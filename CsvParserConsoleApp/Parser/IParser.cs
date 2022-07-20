@@ -7,5 +7,6 @@ namespace CsvParserConsoleApp.Parser
         List<T> Parse<T>(List<string> fileData, string delimeter) where T : new();
         List<string> GetHeaders(List<string> lines, string delimeter);
         List<PropertyInfo> GetSystemPropertiesOfT<T>();
+        T Create<T>() where T : new();
     }
 }
