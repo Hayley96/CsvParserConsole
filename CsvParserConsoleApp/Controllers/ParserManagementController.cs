@@ -42,5 +42,10 @@ namespace CsvParserConsoleApp.Controllers
         {
             return _queryManagerService!.ReturnPeopleWithEsqInCompanyName(people);
         }
+
+        public List<Person> QueryGetPeopleFromDerbyshire(List<Person> people)
+        {
+            return _queryManagerService!.ReturnPeopleWhoLiveInDerbyshire(people);
+        }
     }
 }

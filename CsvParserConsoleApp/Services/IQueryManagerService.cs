@@ -6,5 +6,6 @@ namespace CsvParserConsoleApp.Services
     {
         List<Person> ReturnAllPeople(List<Person> people);
         List<Person> ReturnPeopleWithEsqInCompanyName(List<Person> people);
+        List<Person> ReturnPeopleWhoLiveInDerbyshire(List<Person> people);
     }
 }
