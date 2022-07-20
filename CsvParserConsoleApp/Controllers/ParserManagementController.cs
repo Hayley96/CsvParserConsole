@@ -57,5 +57,10 @@ namespace CsvParserConsoleApp.Controllers
         {
             return _queryManagerService!.ReturnPeopleWhoseURLIsLongerThan35Chars(people);
         }
+
+        public List<Person> QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue(List<Person> people)
+        {
+            return _queryManagerService!.ReturnPeopleWhoLiveInPostCodeSingleDigit(people);
+        }
     }
 }
