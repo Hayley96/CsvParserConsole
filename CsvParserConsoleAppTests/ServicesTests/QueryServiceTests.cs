@@ -72,6 +72,17 @@ namespace CsvParserConsoleAppTests.ServicesTests
             result.Count.Should().Be(1);
         }
 
+        [Test]
+        public void GetPeopleWhoLiveInPostCodeSingleDigit_Returns_People_With_PostCode_With_Single_Digit()
+        {
+            var data = GetTestModelPersonData();
+
+            var result = queryManagerService.ReturnPeopleWhoLiveInPostCodeSingleDigit(data);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(2);
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>

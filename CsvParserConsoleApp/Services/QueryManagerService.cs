@@ -20,5 +20,8 @@ namespace CsvParserConsoleApp.Services
 
         public List<Person> ReturnPeopleWhoseURLIsLongerThan35Chars(List<Person> people) =>
             people.Where(p => p.Web!.Length > 35).ToList();
+
+        public List<Person> ReturnPeopleWhoLiveInPostCodeSingleDigit(List<Person> people) =>
+            people.Where(p => p.Postal!.Substring(0, p.Postal.IndexOf(" ")).Count(i => Char.IsDigit(i)) == 1).ToList();
     }
 }
