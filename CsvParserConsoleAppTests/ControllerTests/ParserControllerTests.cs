@@ -11,18 +11,23 @@ namespace CsvParserConsoleAppTests.ControllerTests
     {
         private ParserManagementController? _controller;
         private Mock<IParserManagementService>? _mockParserManagementService;
-        private Mock<IParser>? _parser;
+        private Mock<IQueryManagerService>? _mockQueryManagerService;
+        private Mock<IParser>? _mockParser;
         private List<string> _strPeopleTestData;
+        private List<Person> _ObjPeopleTestData;
         private string _delimeter;
 
         [SetUp] 
         public void Setup()
         {
             _strPeopleTestData = GetStringTestData();
+            _ObjPeopleTestData = GetTestModelPersonData();
             _delimeter = ",";
             _mockParserManagementService = new Mock<IParserManagementService>();
-            _parser = new Mock<IParser>();
-            _controller = new ParserManagementController(_mockParserManagementService.Object, _parser.Object, _delimeter);
+            _mockQueryManagerService = new Mock<IQueryManagerService>();
+            _mockParser = new Mock<IParser>();
+            _controller = new ParserManagementController(_mockParserManagementService.Object, _mockQueryManagerService.Object, 
+                _mockParser.Object, _delimeter);
         }
 
         [Test]
@@ -32,14 +37,15 @@ namespace CsvParserConsoleAppTests.ControllerTests
             var result = _controller!.GetRawDataFromFile();
 
             result.Should().BeOfType(typeof(List<string>));
-            result.Count.Should().Be(501);
+            result.Count.Should().Be(31);
         }
 
         [Test]
         public void Parse_Correctly_Parses_List_Of_Strings_And_Returns_List_Of_Person()
         {
 
-            _mockParserManagementService!.Setup(b => b.RunParser(_parser!.Object, _strPeopleTestData, _delimeter)).Returns(GetTestModelPersonData());
+            _mockParserManagementService!.Setup(b => b.RunParser(_mockParser!.Object, _strPeopleTestData, _delimeter))
+                .Returns(GetTestModelPersonData());
 
             var result = _controller!.Parse(_strPeopleTestData);
 
@@ -47,76 +53,48 @@ namespace CsvParserConsoleAppTests.ControllerTests
             result.Count.Should().Be(5);
         }
 
-        private List<string> GetStringTestData()
+        [Test]
+        public void QueryGetPeople_Returns_List_Of_Person()
+        {
+            _mockQueryManagerService!.Setup(b => b.ReturnAllPeople(_ObjPeopleTestData)).Returns(GetTestModelPersonData());
+
+            var result = _controller!.QueryGetPeople(_ObjPeopleTestData);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(5);
+        }
+
+        private List<string> GetTestHeaders()
         {
             return new List<string>
             {
-                    {
-                        @"Aleshia,
-                        Tomkiewicz,
-                        Alan D Rosenburg Cpa Pc,
-                        147 Taylor St,
-                        St. Stephens Ward,
-                        Derbyshire
-                        C2 7PP,
-                        01835-703597,
-                        01944-369967,
-                        atomkiewicz@hotmail.com,
-                        http://www.alandrosenburgcpapc.co.uk"
-                    },
-                    {
-                       @"Evan,
-                       Zigomalas,
-                       Cap Gemini America,
-                       555 Binney St,
-                       Abbey Ward,
-                       Buckinghamshire,
-                       H91 2AX,
-                       01937-864715,
-                       01714-737668,
-                       evan.zigomalas@gmail.com,
-                       http://www.capgeminiamerica.co.uk"
-                    },
-                    {
-                        @"France,
-                        Andrade,
-                        Elliott, John W Esq,
-                        8 Moor Place,
-                        East Southbourne and Tuckton W,
-                        Derbyshire,
-                        B6 3BE,
-                        01347-368222,
-                        01935-821636,
-                        france.andrade@hotmail.com,
-                        http://www.elliottjohnwesq.co.uk"
-                    },
-                    {
-                       @"Zoe,
-                       Zigomalas,
-                       Cap Gemini America,
-                       555 Binney St,
-                       Abbey Ward,
-                       Buckinghamshire,
-                       H21 2AX,
-                       01937-864715,
-                       01714-737668,
-                       evan.zigomalas@gmail.com,
-                       http://www.capgeminiamerica.co.uk"
-                   },
-                   {
-                       @"Marvin,
-                       Zigomalas,
-                       Cap Gemini America,
-                       555 Binney St,
-                       Abbey Ward,
-                       Buckinghamshire,
-                       SE21 2AX,
-                       01937-864715,
-                       01714-737668,
-                       evan.zigomalas@gmail.com,
-                       http://www.capgeminiamerica.co.uk"
-                   },
-            }.ToList();
+                { @"Firstname,Lastname,Companyname,Address,City,County,Postal,Phone1,Phone2,Email,Web" },
+            };
+        }
+
+        List<string> GetStringTestData()
+        {
+            return new List<string>
+            {
+                { @"Aleshia,Tomkiewicz,Alan D Rosenburg Cpa Pc,147 Taylor St, St. Stephens Ward, Derbyshire, C2 7PP,01835-703597,01944-369967,atomkiewicz@hotmail.com,http://www.alandrosenburgcpapc.co.uk" },
+                { @"Evan,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward, Buckinghamshire, H91 2AX, 01937-864715, 01714-737668, evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" },
+                { @"France,Andrade,Elliott, John W Esq,8 Moor Place,East Southbourne and Tuckton W,Derbyshire,B6 3BE,01347-368222,01935-821636,france.andrade@hotmail.com,http://www.elliottjohnwesq.co.uk" },
+                { @"Zoe,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward,Buckinghamshire,H21 2AX,01937-864715,01714-737668,evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" },
+                { @"Marvin,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward,Buckinghamshire,SE21 2AX,01937-864715,01714-737668,evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" }
+            };
+        }
+
+        List<string> GetStringTestDataWithHeaders()
+        {
+            return new List<string>
+            {
+                { @"Firstname,Lastname,Companyname,Address,City,County,Postal,Phone1,Phone2,Email,Web" },
+                { @"Aleshia,Tomkiewicz,Alan D Rosenburg Cpa Pc,147 Taylor St, St. Stephens Ward, Derbyshire, C2 7PP,01835-703597,01944-369967,atomkiewicz@hotmail.com,http://www.alandrosenburgcpapc.co.uk" },
+                { @"Evan,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward, Buckinghamshire, H91 2AX, 01937-864715, 01714-737668, evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" },
+                { @"France,Andrade,Elliott, John W Esq,8 Moor Place,East Southbourne and Tuckton W,Derbyshire,B6 3BE,01347-368222,01935-821636,france.andrade@hotmail.com,http://www.elliottjohnwesq.co.uk" },
+                { @"Zoe,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward,Buckinghamshire,H21 2AX,01937-864715,01714-737668,evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" },
+                { @"Marvin,Zigomalas,Cap Gemini America,555 Binney St,Abbey Ward,Buckinghamshire,SE21 2AX,01937-864715,01714-737668,evan.zigomalas@gmail.com,http://www.capgeminiamerica.co.uk" }
+            };
         }
 
         private List<Person> GetTestModelPersonData()
@@ -124,19 +102,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
             return new List<Person>
             {
                 new Person()
-                    {
-                        Firstname = "Aleshia",
-                        Lastname = "Tomkiewicz",
-                        Companyname = "Alan D Rosenburg Cpa Pc",
-                        Address = "147 Taylor St",
-                        City = "St. Stephens Ward",
-                        County = "Derbyshire",
-                        Postal = "C2 7PP",
-                        Phone1 = "01835-703597",
-                        Phone2 = "01944-369967",
-                        Email = "atomkiewicz@hotmail.com",
-                        Web = "http://www.alandrosenburgcpapc.co.uk",
-                    },
+                    { Firstname = "Aleshia", Lastname = "Tomkiewicz", Companyname = "Alan D Rosenburg Cpa Pc", Address = "147 Taylor St", City = "St. Stephens Ward", County = "Derbyshire", Postal = "C2 7PP",Phone1 = "01835-703597",Phone2 = "01944-369967",Email = "atomkiewicz@hotmail.com",Web = "http://www.alandrosenburgcpapc.co.uk" },
                 new Person()
                    {
                        Firstname = "Evan",

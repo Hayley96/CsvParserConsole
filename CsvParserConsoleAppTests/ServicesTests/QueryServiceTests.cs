@@ -1,75 +1,29 @@
 ﻿using CsvParserApp.Models;
-using CsvParserConsoleApp.Controllers;
-using CsvParserConsoleApp.Parser;
 using CsvParserConsoleApp.Services;
-using FluentAssertions;
-using Moq;
-using System.Reflection;
 
-namespace CsvParserConsoleAppTests.ParserTests
+namespace CsvParserConsoleAppTests.ServicesTests
 {
-    public class CsvParserTests
+    public class QueryServiceTests
     {
-        private IParser? _parser;
-        private List<string> _strPeopleTestData;
-        private string _delimeter;
+        private QueryManagerService queryManagerService;
 
         [SetUp]
         public void Setup()
         {
-            _parser = new CsvParser();
-            _strPeopleTestData = GetStringTestData();
-            _delimeter = ",";
+            queryManagerService = new();
         }
 
         [Test]
-        public void RunParser_Returns_A_List_Of_Type_T_Person()
+        public void GetAllPeople_Returns_All_People()
         {
-            var testdata = GetStringTestDataWithHeaders();
+            var data = GetTestModelPersonData();
 
-            var result = _parser!.Parse<Person>(testdata, _delimeter);
+            var people = queryManagerService.ReturnAllPeople(data);
 
-            result.Should().BeOfType(typeof(List<Person>));
-            result.Count.Should().Be(5);
-        }
-
-        [Test]
-        public void GetHeaders_Returns_A_List_Of_Headers()
-        {
-
-            var result = _parser!.GetHeaders(GetTestHeaders(), _delimeter);
-
-            result.Should().BeOfType(typeof(List<string>));
-            result.Count.Should().Be(11);
-        }
-
-        [Test]
-        public void GetSystemPropertiesOfT_returns_All_Properties_Of_T()
-        {
-            List<PropertyInfo> result = _parser!.GetSystemPropertiesOfT<Person>();
-
-            result.Count.Should().Be(11);
-        }
-
-        [Test]
-        public void Create_returns_An_Instance_Of_T()
-        {
-            var result = _parser!.Create<Person>();
-
-            Assert.That(result, Is.InstanceOf<Person>());
-        }
-
-        [Test]
-        public void MapValuesToTypeTProperties_returns_An_Instance_Of_T_With_Correct_Property_Values()
-        {
-            var lines = GetStringTestData();
-            var headers = _parser!.GetHeaders(GetTestHeaders(), _delimeter);
-            List<PropertyInfo> props = _parser!.GetSystemPropertiesOfT<Person>();
-
-            var result = _parser.MapValuesToTypeTProperties<Person>(lines[0], _delimeter, headers, props);
-
-            Assert.That(result, Is.InstanceOf<Person>());
-            Assert.That(result.Firstname == "Aleshia");
+            Assert.That(people.Count, Is.EqualTo(5));
+            Assert.That(people[0].Firstname, Is.EqualTo("Aleshia"));
+            Assert.That(people[1].Firstname, Is.EqualTo("Evan"));
+            Assert.That(people[2].Firstname, Is.EqualTo("France"));
         }
 
         private List<string> GetTestHeaders()

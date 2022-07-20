@@ -1,6 +1,6 @@
-﻿namespace CsvParserConsoleApp.Parser
+﻿namespace CsvParserConsoleApp.Services
 {
-    public static class GetRawFileData
+    public static class FileIOManagerService
     {
         public static List<string> RawFileData { get; private set; } = new();
 
