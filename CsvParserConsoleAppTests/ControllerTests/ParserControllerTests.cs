@@ -88,6 +88,18 @@ namespace CsvParserConsoleAppTests.ControllerTests
             result.Count().Should().Be(expectedResult.Count);
         }
 
+        [Test]
+        public void QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits_Returns_List_of_Objects()
+        {
+            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Address!.Substring(0, p.Address.IndexOf(" ")).Length == 3).ToList();
+            _mockQueryManagerService!.Setup(b => b.ReturnPeopleWhoseHouseNumberIsThreeDigits(_ObjPeopleTestData)).Returns(expectedResult);
+
+            var result = _controller!.QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(_ObjPeopleTestData);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count().Should().Be(expectedResult.Count);
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>

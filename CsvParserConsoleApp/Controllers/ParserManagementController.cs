@@ -47,5 +47,10 @@ namespace CsvParserConsoleApp.Controllers
         {
             return _queryManagerService!.ReturnPeopleWhoLiveInDerbyshire(people);
         }
+
+        public List<Person> QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(List<Person> people)
+        {
+            return _queryManagerService!.ReturnPeopleWhoseHouseNumberIsThreeDigits(people);
+        }
     }
 }
