@@ -1,5 +1,6 @@
 ﻿using CsvParserApp.Models;
 using CsvParserConsoleApp.Services;
+using FluentAssertions;
 
 namespace CsvParserConsoleAppTests.ServicesTests
 {
@@ -18,12 +19,13 @@ namespace CsvParserConsoleAppTests.ServicesTests
         {
             var data = GetTestModelPersonData();
 
-            var people = queryManagerService.ReturnAllPeople(data);
+            var result = queryManagerService.ReturnAllPeople(data);
 
-            Assert.That(people.Count, Is.EqualTo(5));
-            Assert.That(people[0].Firstname, Is.EqualTo("Aleshia"));
-            Assert.That(people[1].Firstname, Is.EqualTo("Evan"));
-            Assert.That(people[2].Firstname, Is.EqualTo("France"));
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(5);
+            Assert.That(result[0].Firstname, Is.EqualTo("Aleshia"));
+            Assert.That(result[1].Firstname, Is.EqualTo("Evan"));
+            Assert.That(result[2].Firstname, Is.EqualTo("France"));
         }
 
         [Test]
@@ -31,9 +33,21 @@ namespace CsvParserConsoleAppTests.ServicesTests
         {
             var data = GetTestModelPersonData();
 
-            var people = queryManagerService.ReturnPeopleWithEsqInCompanyName(data);
+            var result = queryManagerService.ReturnPeopleWithEsqInCompanyName(data);
 
-            Assert.That(people.Count, Is.EqualTo(1));
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(1);
+        }
+
+        [Test]
+        public void GetPeopleWhoLiveInDerbyshire_Returns_People_With_County_Derbyshire()
+        {
+            var data = GetTestModelPersonData();
+
+            var result = queryManagerService.ReturnPeopleWhoLiveInDerbyshire(data);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(2);
         }
 
         private List<string> GetTestHeaders()

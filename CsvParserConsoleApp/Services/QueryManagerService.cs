@@ -11,5 +11,8 @@ namespace CsvParserConsoleApp.Services
 
         public List<Person> ReturnPeopleWithEsqInCompanyName(List<Person> people) =>
             people.Where(p => p.Companyname!.Contains("Esq")).ToList();
+
+        public List<Person> ReturnPeopleWhoLiveInDerbyshire(List<Person> people) =>
+            people.Where(p => p.County!.Equals("Derbyshire")).ToList();
     }
 }
