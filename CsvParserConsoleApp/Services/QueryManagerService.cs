@@ -17,5 +17,8 @@ namespace CsvParserConsoleApp.Services
 
         public List<Person> ReturnPeopleWhoseHouseNumberIsThreeDigits(List<Person> people) =>
             people.Where(p => p.Address!.Substring(0, p.Address.IndexOf(" ")).Length == 3).ToList();
+
+        public List<Person> ReturnPeopleWhoseURLIsLongerThan35Chars(List<Person> people) =>
+            people.Where(p => p.Web!.Length > 35).ToList();
     }
 }

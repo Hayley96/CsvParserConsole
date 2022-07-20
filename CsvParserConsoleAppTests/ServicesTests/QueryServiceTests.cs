@@ -61,6 +61,17 @@ namespace CsvParserConsoleAppTests.ServicesTests
             result.Count.Should().Be(4);
         }
 
+        [Test]
+        public void ReturnPeopleWhoseURLIsLongerThan35Chars_Returns_People_With_URL_Length_Greater_Than_35()
+        {
+            var data = GetTestModelPersonData();
+
+            var result = queryManagerService.ReturnPeopleWhoseURLIsLongerThan35Chars(data);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(1);
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>
