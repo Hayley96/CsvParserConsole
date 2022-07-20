@@ -15,7 +15,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
         }
 
         [Test]
-        public void GetAllPeople_Returns_All_People()
+        public void ReturnAllPeople_Returns_All_People()
         {
             var data = GetTestModelPersonData();
 
@@ -29,7 +29,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
         }
 
         [Test]
-        public void GetPeopleWithEsqInCompanyName_Returns_People_With_Esq_In_CompanyName()
+        public void ReturnPeopleWithEsqInCompanyName_Returns_People_With_Esq_In_CompanyName()
         {
             var data = GetTestModelPersonData();
 
@@ -40,7 +40,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
         }
 
         [Test]
-        public void GetPeopleWhoLiveInDerbyshire_Returns_People_With_County_Derbyshire()
+        public void ReturnPeopleWhoLiveInDerbyshire_Returns_People_With_County_Derbyshire()
         {
             var data = GetTestModelPersonData();
 
@@ -48,6 +48,17 @@ namespace CsvParserConsoleAppTests.ServicesTests
 
             result.Should().BeOfType(typeof(List<Person>));
             result.Count.Should().Be(2);
+        }
+
+        [Test]
+        public void ReturnPeopleWhoseHouseNumberIsThreeDigits_Returns_People_With_House_Number_Consisting_of_3_Digits_Only()
+        {
+            var data = GetTestModelPersonData();
+
+            var result = queryManagerService.ReturnPeopleWhoseHouseNumberIsThreeDigits(data);
+
+            result.Should().BeOfType(typeof(List<Person>));
+            result.Count.Should().Be(4);
         }
 
         private List<string> GetTestHeaders()
