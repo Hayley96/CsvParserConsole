@@ -8,5 +8,8 @@ namespace CsvParserConsoleApp.Services
 
         public List<Person> ReturnAllPeople(List<Person> people) =>
             people;
+
+        public List<Person> GetPeopleWithEsqInCompanyName(List<Person> people) =>
+            people.Where(p => p.Companyname!.Contains("Esq")).ToList();
     }
 }

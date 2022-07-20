@@ -26,6 +26,16 @@ namespace CsvParserConsoleAppTests.ServicesTests
             Assert.That(people[2].Firstname, Is.EqualTo("France"));
         }
 
+        [Test]
+        public void GetPeopleWithEsqInCompanyName_Returns_People_With_Esq_In_CompanyName()
+        {
+            var data = GetTestModelPersonData();
+
+            var people = queryManagerService.GetPeopleWithEsqInCompanyName(data);
+
+            Assert.That(people.Count, Is.EqualTo(1));
+        }
+
         private List<string> GetTestHeaders()
         {
             return new List<string>
