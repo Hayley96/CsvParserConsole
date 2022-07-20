@@ -1,6 +1,7 @@
 ﻿using CsvParserApp.Models;
 using CsvParserConsoleApp.Parser;
 using CsvParserConsoleApp.Services;
+using CsvParserConsoleApp.View;
 
 namespace CsvParserConsoleApp.Controllers
 {
@@ -30,37 +31,39 @@ namespace CsvParserConsoleApp.Controllers
 
         public List<Person> Parse(List<string> RawFileData)
         {
-            return People = _parserManagementService!.RunParser(_parser!, RawFileData, _delimeter);
+            People = _parserManagementService!.RunParser(_parser!, RawFileData, _delimeter);
+            People.ForEach(p => p.ListPosition = People.IndexOf(p) + 1);
+            return People;
         }
 
         public List<Person> QueryGetPeople(List<Person> people)
         {
-            return _queryManagerService!.ReturnAllPeople(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnAllPeople(people));
         }
 
         public List<Person> QueryGetPeopleWithCompanyNameContainingEsq(List<Person> people)
         {
-            return _queryManagerService!.ReturnPeopleWithEsqInCompanyName(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnPeopleWithEsqInCompanyName(people));
         }
 
         public List<Person> QueryGetPeopleFromDerbyshire(List<Person> people)
         {
-            return _queryManagerService!.ReturnPeopleWhoLiveInDerbyshire(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnPeopleWhoLiveInDerbyshire(people));
         }
 
         public List<Person> QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(List<Person> people)
         {
-            return _queryManagerService!.ReturnPeopleWhoseHouseNumberIsThreeDigits(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnPeopleWhoseHouseNumberIsThreeDigits(people));
         }
 
         public List<Person> QueryGetPeopleWhoseURLLengthGreaterThan35(List<Person> people)
         {
-            return _queryManagerService!.ReturnPeopleWhoseURLIsLongerThan35Chars(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnPeopleWhoseURLIsLongerThan35Chars(people));
         }
 
         public List<Person> QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue(List<Person> people)
         {
-            return _queryManagerService!.ReturnPeopleWhoLiveInPostCodeSingleDigit(people);
+            return PersonView.DisplayResults(_queryManagerService!.ReturnPeopleWhoLiveInPostCodeSingleDigit(people));
         }
     }
 }

@@ -4,16 +4,17 @@ namespace CsvParserApp.Models
 {
     public class Person
     {
-        public string? Firstname { get; set; }
-        public string? Lastname { get; set; }
-        public string? Companyname { get; set; }
-        public string? Address { get; set; }
-        public string? City { get; set; }
-        public string? County { get; set; }
-        public string? Postal { get; set; }
-        public string? Phone1 { get; set; }
-        public string? Phone2 { get; set; }
-        public string? Email { get; set; }
-        public string? Web { get; set; }
+        public int ListPosition { get; set; }
+        public string Firstname { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty;
+        public string Companyname { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string County { get; set; } = string.Empty;
+        public string Postal { get; set; } = string.Empty;
+        public string Phone1 { get; set; } = string.Empty;
+        public string Phone2 { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Web { get; set; } = string.Empty;
     }
 }

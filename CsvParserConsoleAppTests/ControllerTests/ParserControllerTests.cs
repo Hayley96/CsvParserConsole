@@ -32,21 +32,11 @@ namespace CsvParserConsoleAppTests.ControllerTests
         }
 
         [Test]
-        public void GetRawDataFromFile_Returns_A_List_Of_Strings()
-        {
-
-            var result = _controller!.GetRawDataFromFile();
-
-            result.Should().BeOfType(typeof(List<string>));
-            result.Count.Should().Be(31);
-        }
-
-        [Test]
         public void Parse_Correctly_Parses_List_Of_Strings_And_Returns_List_Of_Person()
         {
 
             _mockParserManagementService!.Setup(b => b.RunParser(_mockParser!.Object, _strPeopleTestData, _delimeter))
-                .Returns(ListTestData.GetTestModelPersonData());
+                .Returns(_ObjPeopleTestData);
 
             var result = _controller!.Parse(_strPeopleTestData);
 
@@ -57,7 +47,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
         [Test]
         public void QueryGetPeople_Returns_List_Of_Person()
         {
-            _mockQueryManagerService!.Setup(b => b.ReturnAllPeople(_ObjPeopleTestData)).Returns(ListTestData.GetTestModelPersonData());
+            _mockQueryManagerService!.Setup(b => b.ReturnAllPeople(_ObjPeopleTestData)).Returns(_ObjPeopleTestData);
 
             var result = _controller!.QueryGetPeople(_ObjPeopleTestData);
 

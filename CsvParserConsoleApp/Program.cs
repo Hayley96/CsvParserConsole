@@ -2,7 +2,6 @@
 using CsvParserConsoleApp.Controllers;
 using CsvParserConsoleApp.Parser;
 using CsvParserConsoleApp.Services;
-using System.Reflection;
 
 IParser parser;
 parser = new CsvParser();
@@ -10,21 +9,29 @@ parser = new CsvParser();
 string delimeter = ",";
 
 ParserManagementController controller = new(new ParserManagementService(), new QueryManagerService(), new CsvParser(), delimeter);
-var PersonRawData = controller.GetRawDataFromFile();
-var peopleresult = controller.Parse(PersonRawData);
+var PersonRawData = controller.GetRawDataFromFile(); //list of raw data from file - FileIO
+var peopleresult = controller.Parse(PersonRawData);  //list of people parsed - Parser
 
-//peopleresult.ForEach(person => Console.WriteLine(person.Firstname));
-
-var people = GetTestModelPersonData();
-people.ForEach(person => Console.WriteLine(person.Firstname));
-
+var derbyshirepeople = controller.QueryGetPeopleFromDerbyshire(peopleresult); //sample query call - Query
 
 List<Person> GetTestModelPersonData()
 {
     return new List<Person>
             {
                 new Person()
-                    { Firstname = "Aleshia", Lastname = "Tomkiewicz", Companyname = "Alan D Rosenburg Cpa Pc", Address = "147 Taylor St", City = "St. Stephens Ward", County = "Derbyshire", Postal = "C2 7PP",Phone1 = "01835-703597",Phone2 = "01944-369967",Email = "atomkiewicz@hotmail.com",Web = "http://www.alandrosenburgcpapc.co.uk" },
+                    { 
+                        Firstname = "Aleshia", 
+                        Lastname = "Tomkiewicz", 
+                        Companyname = "Alan D Rosenburg Cpa Pc", 
+                        Address = "147 Taylor St", 
+                        City = "St. Stephens Ward", 
+                        County = "Derbyshire", 
+                        Postal = "C2 7PP",
+                        Phone1 = "01835-703597",
+                        Phone2 = "01944-369967",
+                        Email = "atomkiewicz@hotmail.com",
+                        Web = "http://www.alandrosenburgcpapc.co.uk" 
+                    },
                 new Person()
                    {
                        Firstname = "Evan",

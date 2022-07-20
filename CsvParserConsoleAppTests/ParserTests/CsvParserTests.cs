@@ -51,7 +51,7 @@ namespace CsvParserConsoleAppTests.ParserTests
         {
             List<PropertyInfo> result = _parser!.GetSystemPropertiesOfT<Person>();
 
-            result.Count.Should().Be(11);
+            result.Count.Should().Be(12);
         }
 
         [Test]
