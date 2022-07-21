@@ -79,5 +79,5 @@ Fork this repo to your Github and then clone the forked version of this repo.
 	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [CsvParserConsoleAppDataDirectory](./CsvParserConsoleApp/Data)
 	 - If your 'Default Working Directory' is not set to application root '\bin\Debug\net6.0', then you will need to specify a new file path:
        - To change the filepath in the appliation, you will need to modify the path in the following file:
-	      * [ParserManagementService.cs](https://github.com/Hayley96/CsvParser/blob/main/CsvParserApp/Services/ParserManagementService.cs)
-	      * ![ParserManagementServiceFilePath](https://github.com/Hayley96/CsvParser/blob/main/ParserManagementService_FilePath.PNG)
+	      * [ParserManagementController.cs](https://github.com/Hayley96/CsvParser/blob/main/CsvParserApp/Services/ParserManagementService.cs)
+	      * ![ParserManagementControllerFilePath](https://github.com/Hayley96/CsvParserConsole/blob/main/GIF/FilePathMethod.png)
