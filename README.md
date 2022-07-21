@@ -68,7 +68,7 @@ The application consists of the following main components:
 | `Get people who live in a postcode with a single digit value` | `List<Person>`| Returns list of people whose postcode contains one digit          |
 
 
-## Pre-requisites <a name="prerequisites"></a>
+## ⭐ Pre-requisites <a name="prerequisites"></a>
 
 * C# / .NET 6
 * NuGet
