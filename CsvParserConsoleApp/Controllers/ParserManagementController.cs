@@ -22,11 +22,9 @@ namespace CsvParserConsoleApp.Controllers
             _delimeter = delimeter;
         }
 
-        public List<string> GetRawDataFromFile()
+        public List<string> GetRawDataFromFile(string file)
         {
-            var GetAppDir = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory())!.ToString())!.ToString());
-            var fileDir = $"{GetAppDir}\\Data\\input.csv".ToString();
-            return RawFileData = FileIOManagerService.GetData(fileDir);
+            return RawFileData = FileIOManagerService.GetData(file);
         }
 
         public List<Person> Parse(List<string> RawFileData)

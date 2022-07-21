@@ -13,7 +13,6 @@ namespace CsvParserConsoleAppTests.ParserTests
     {
         private IParser? _parser;
         private List<string> _strPeopleTestData;
-        private List<Person> _ObjPeopleTestData;
         private string _delimeter;
 
         [SetUp]
@@ -21,7 +20,6 @@ namespace CsvParserConsoleAppTests.ParserTests
         {
             _parser = new CsvParser();
             _strPeopleTestData = ListTestData.GetStringTestData();
-            _ObjPeopleTestData = ListTestData.GetTestModelPersonData();
             _delimeter = ",";
         }
 

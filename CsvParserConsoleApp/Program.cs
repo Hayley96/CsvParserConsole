@@ -5,9 +5,11 @@ using CsvParserConsoleApp.UI;
 
 string delimeter = ",";
 bool continueRunning = true;
+var GetAppDir = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory())!.ToString())!.ToString());
+var fileDir = $"{GetAppDir}\\Data\\input.csv".ToString();
 
 ParserManagementController controller = new(new ParserManagerService(), new QueryManagerService(), new CsvParser(), delimeter);
-var dataFromFile = controller.GetRawDataFromFile();
+var dataFromFile = controller.GetRawDataFromFile(fileDir);
 var dataFromParser = controller.Parse(dataFromFile);
 
 while (continueRunning)

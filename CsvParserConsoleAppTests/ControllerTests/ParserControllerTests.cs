@@ -10,6 +10,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
 {
     public class ParserControllerTests
     {
+        private const int StartIndex = 0;
         private ParserManagementController? _controller;
         private Mock<IParserManagerService>? _mockParserManagementService;
         private Mock<IQueryManagerService>? _mockQueryManagerService;
@@ -64,7 +65,7 @@ namespace CsvParserConsoleAppTests.ControllerTests
             var result = _controller!.QueryGetPeopleWithCompanyNameContainingEsq(_ObjPeopleTestData);
 
             result.Should().BeOfType(typeof(List<Person>));
-            result.Count().Should().Be(expectedResult.Count);
+            result.Count.Should().Be(expectedResult.Count);
         }
 
         [Test]
@@ -76,19 +77,19 @@ namespace CsvParserConsoleAppTests.ControllerTests
             var result = _controller!.QueryGetPeopleFromDerbyshire(_ObjPeopleTestData);
 
             result.Should().BeOfType(typeof(List<Person>));
-            result.Count().Should().Be(expectedResult.Count);
+            result.Count.Should().Be(expectedResult.Count);
         }
 
         [Test]
         public void QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits_Returns_List_of_Objects()
         {
-            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Address!.Substring(0, p.Address.IndexOf(" ")).Length == 3).ToList();
+            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Address![..p.Address.IndexOf(" ")].Length == 3).ToList();
             _mockQueryManagerService!.Setup(b => b.ReturnPeopleWhoseHouseNumberIsThreeDigits(_ObjPeopleTestData)).Returns(expectedResult);
 
             var result = _controller!.QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(_ObjPeopleTestData);
 
             result.Should().BeOfType(typeof(List<Person>));
-            result.Count().Should().Be(expectedResult.Count);
+            result.Count.Should().Be(expectedResult.Count);
         }
 
         [Test]
@@ -100,19 +101,19 @@ namespace CsvParserConsoleAppTests.ControllerTests
             var result = _controller!.QueryGetPeopleWhoseURLLengthGreaterThan35(_ObjPeopleTestData);
 
             result.Should().BeOfType(typeof(List<Person>));
-            result.Count().Should().Be(expectedResult.Count);
+            result.Count.Should().Be(expectedResult.Count);
         }
 
         [Test]
         public void QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue_Returns_List_of_Objects()
         {
-            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Postal!.Substring(0, p.Postal.IndexOf(" ")).Count(i => Char.IsDigit(i)) == 1).ToList();
+            List<Person> expectedResult = _ObjPeopleTestData.Where(p => p.Postal![..p.Postal.IndexOf(" ")].Count(i => Char.IsDigit(i)) == 1).ToList();
             _mockQueryManagerService!.Setup(b => b.ReturnPeopleWhoLiveInPostCodeSingleDigit(_ObjPeopleTestData)).Returns(expectedResult);
 
             var result = _controller!.QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue(_ObjPeopleTestData);
 
             result.Should().BeOfType(typeof(List<Person>));
-            result.Count().Should().Be(expectedResult.Count);
+            result.Count.Should().Be(expectedResult.Count);
         }
 
     }

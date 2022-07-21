@@ -8,14 +8,12 @@ namespace CsvParserConsoleAppTests.ServicesTests
     public class QueryServiceTests
     {
         private QueryManagerService queryManagerService;
-        private List<string> _strPeopleTestData;
         private List<Person> _ObjPeopleTestData;
 
         [SetUp]
         public void Setup()
         {
             queryManagerService = new();
-            _strPeopleTestData = ListTestData.GetStringTestData();
             _ObjPeopleTestData = ListTestData.GetTestModelPersonData();
         }
 
@@ -28,9 +26,12 @@ namespace CsvParserConsoleAppTests.ServicesTests
 
             result.Should().BeOfType(typeof(List<Person>));
             result.Count.Should().Be(5);
-            Assert.That(result[0].Firstname, Is.EqualTo("Aleshia"));
-            Assert.That(result[1].Firstname, Is.EqualTo("Evan"));
-            Assert.That(result[2].Firstname, Is.EqualTo("France"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(result[0].Firstname, Is.EqualTo("Aleshia"));
+                Assert.That(result[1].Firstname, Is.EqualTo("Evan"));
+                Assert.That(result[2].Firstname, Is.EqualTo("France"));
+            });
         }
 
         [Test]
