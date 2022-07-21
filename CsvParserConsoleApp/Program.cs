@@ -9,7 +9,7 @@ bool continueRunning = true;
 IParser parser = new CsvParser();
 Query query = new();
 
-string file = FileLoader.Path();
+string file = FilePath.Path();
 var data = FileLoader.Load(file);
 var people = parser.Parse<Person>(data, DELIMITER);
 
