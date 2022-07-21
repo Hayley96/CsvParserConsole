@@ -15,7 +15,7 @@ var dataFromParser = controller.Parse(dataFromFile);
 while (continueRunning)
 {
     Console.Clear();
-    string QueryOptions = DisplayMenu.PrintToScreen("\rSelect Query To Run:", DisplayMenu.DisplayQueryOptions, PersonQueryOptions.QueryOptions);
+    string QueryOptions = DisplayMenu.PrintToScreen("\rSelect Query To Run:", DisplayMenu.DisplayQueryOptions, MenuOptions.QueryOptions);
     Console.Clear();
     QueryOptionSwitchCase(QueryOptions);
     Console.WriteLine($"\nPress 'R' to run another query or any other key to exit......");

@@ -1,6 +1,6 @@
 ﻿namespace CsvParserConsoleApp.UI
 {
-    public static class PersonQueryOptions
+    public static class MenuOptions
     {
         public static readonly List<string> QueryOptions = new()
         {
