@@ -34,7 +34,7 @@ The application consists of the following main components:
 </div>
 </br></br>
 
-### 🔄 Query References <a name="QueryReference"></a>
+### ❓ Query References <a name="QueryReference"></a>
 
 #### Get all people
 
@@ -80,7 +80,7 @@ Fork this repo to your Github and then clone the forked version of this repo.
 
 - Setup:
 	- Open up project in Visual Studio
-	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [CsvParserConsoleAppDataDirectory](./CsvParserConsoleApp/Data)
+	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [./CsvParserConsoleApp/Data](./CsvParserConsoleApp/Data)
 	 - If your 'Default Working Directory' is not set to application root '\bin\Debug\net6.0', then you will need to specify a new file path:
        - To change the filepath in the appliation, you will need to modify the path in the following file:
 	      * [ParserManagementController.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Controllers/ParserManagementController.cs)
@@ -88,7 +88,7 @@ Fork this repo to your Github and then clone the forked version of this repo.
 
 ### Restore Dependencies <a name="restoredependencies"></a>
 
-- Open up a terminal and navigate to the root folder of the main application directory [CsvParser](./CsvParserApp):
+- Open up a terminal and navigate to the root folder of the main application directory [CsvParserConsoleApp](./CsvParserConsoleApp):
  - run: `dotnet restore`
 
 ### Run Application <a name="runapplication"></a>
