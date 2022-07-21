@@ -12,9 +12,8 @@ A Console app designed to parse a file, query the file data, and return records.
 4. [Getting Started](#gettingStarted)
    1. [Application Setup](#applicationsetup)
    2. [Restore Dependencies](#restoredependencies)
-   3. [Run Application](#runapplication)
-   4. [Running Tests](#runningtests)
-   5. [Main Entry Point](#mainentrypoint)
+   3. [Running Tests](#runningtests)
+   4. [Main Entry Point](#mainentrypoint)
 
 ## Introduction :wave: <a name="introduction"></a>
 A .NET Console application designed to parse a CSV file and return records from different queries based on a pre-established set of criteria. The console window will display a list of options in a menu format. The options can be navigated using the Arrow Up 🔼 or Arrow Down 🔽 keys. To select a query, navigate to the menu option and hit `Enter`.
@@ -91,11 +90,6 @@ Fork this repo to your Github and then clone the forked version of this repo.
 
 - Open up a terminal and navigate to the root folder of the main application directory [CsvParserConsoleApp](./CsvParserConsoleApp):
  - run: `dotnet restore`
-
-### Run Application <a name="runapplication"></a>
-
-- You can run the application in Visual Studio, or you can go to your terminal and inside the root of this directory, run:
- - run: `dotnet run`
 
 ### Running the Unit Tests <a name="runningtests"></a>
 
