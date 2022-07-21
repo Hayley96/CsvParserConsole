@@ -7,13 +7,13 @@ string delimeter = ",";
 bool continueRunning = true;
 
 ParserManagementController controller = new(new ParserManagerService(), new QueryManagerService(), new CsvParser(), delimeter);
-var PersonRawData = controller.GetRawDataFromFile();
-var peopleresult = controller.Parse(PersonRawData);
+var dataFromFile = controller.GetRawDataFromFile();
+var dataFromParser = controller.Parse(dataFromFile);
 
 while (continueRunning)
 {
     Console.Clear();
-    string QueryOptions = DisplayMenu.PrintToScreen("\rSelect Query To Run", DisplayMenu.DisplayQueryOptions, PersonQueryOptions.QueryOptions);
+    string QueryOptions = DisplayMenu.PrintToScreen("\rSelect Query To Run:", DisplayMenu.DisplayQueryOptions, PersonQueryOptions.QueryOptions);
     Console.Clear();
     QueryOptionSwitchCase(QueryOptions);
     Console.WriteLine($"\nPress 'R' to run another query or any other key to exit......");
@@ -28,22 +28,22 @@ void QueryOptionSwitchCase(string QueryOptions)
     switch (QueryOptions)
     {
         case "Return All People":
-            controller.QueryGetPeople(peopleresult!);
+            controller.QueryGetPeople(dataFromParser!);
             break;
         case "Return People With String 'Esq' In CompanyName":
-            controller.QueryGetPeopleWithCompanyNameContainingEsq(peopleresult!);
+            controller.QueryGetPeopleWithCompanyNameContainingEsq(dataFromParser!);
             break;
         case "Return People Who Live In County Derbyshire":
-            controller.QueryGetPeopleFromDerbyshire(peopleresult!);
+            controller.QueryGetPeopleFromDerbyshire(dataFromParser!);
             break;
         case "Return People Whose House Number Is Exactly Three Digits":
-            controller.QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(peopleresult!);
+            controller.QueryGetPeopleWhoseHouseNumberIsExactlyThreeDigits(dataFromParser!);
             break;
         case "Return People Whose URL Is Longer Than 35 Chars":
-            controller.QueryGetPeopleWhoseURLLengthGreaterThan35(peopleresult!);
+            controller.QueryGetPeopleWhoseURLLengthGreaterThan35(dataFromParser!);
             break;
         case "Return People Who Live In A PostCode With A Single Digit Following The City Code":
-            controller.QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue(peopleresult!);
+            controller.QueryGetPeopleWhoLiveInPostcodeWithSingleDigitValue(dataFromParser!);
             break;
     }
 }
