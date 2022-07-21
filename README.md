@@ -8,6 +8,9 @@ An .NET 6 Console app designed to Parse a file, query the file data, and return 
 2. [Application Overview](#applicationOverview)
    1. [Technologies Used](#technologiesUsed)
    2. [Query References](#QueryReference)
+3. [Pre-requisites](#prerequisites)
+4. [Getting Started](#gettingStarted)
+   1. [Application Setup](#applicationsetup)
 
 ## Introduction :wave: <a name="introduction"></a>
 An .NET 6 Console app designed to parse a CSV file and return records from different queries based on a pre-established set of criteria. 
@@ -58,3 +61,23 @@ The application consists of the following main components:
 | Action                                                        | ReturnType    | Description                                                       |
 | :-------------------------------------------------------------| :-------------| :-----------------------------------------------------------------|
 | `Get people who live in a postcode with a single digit value` | `List<Person>`| returns list of people whose postcode contains one digit          |
+
+
+## Pre-requisites <a name="prerequisites"></a>
+
+* C# / .NET 6
+* NuGet
+
+## 🔀 Getting Started <a name="gettingStarted"></a>
+
+### Application Setup <a name="applicationsetup"></a>
+
+Fork this repo to your Github and then clone the forked version of this repo.
+
+- Setup:
+	- Open up project in Visual Studio
+	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [CsvParserConsoleAppDataDirectory](./CsvParserConsoleApp/Data)
+	 - If your 'Default Working Directory' is not set to application root '\bin\Debug\net6.0', then you will need to specify a new file path:
+       - To change the filepath in the appliation, you will need to modify the path in the following file:
+	      * [ParserManagementService.cs](https://github.com/Hayley96/CsvParser/blob/main/CsvParserApp/Services/ParserManagementService.cs)
+	      * ![ParserManagementServiceFilePath](https://github.com/Hayley96/CsvParser/blob/main/ParserManagementService_FilePath.PNG)
