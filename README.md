@@ -80,11 +80,11 @@ Fork this repo to your Github and then clone the forked version of this repo.
 
 - Setup:
 	- Open up project in Visual Studio
-	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [./CsvParserConsoleApp/Data](./CsvParserConsoleApp/Data)
+	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [.\CsvParserConsoleApp\Data](./CsvParserConsoleApp/Data)
 	 - If your 'Default Working Directory' is not set to application root '\bin\Debug\net6.0', then you will need to specify a new file path:
        - To change the filepath in the appliation, you will need to modify the path in the following file:
-	      * [ParserManagementController.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Controllers/ParserManagementController.cs)
-	      * ![ParserManagementControllerFilePath](https://github.com/Hayley96/CsvParserConsole/blob/main/GIF/FilePathMethod.png)
+	      * [Program.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Program.cs)
+	      * ![ProgramFilePath](https://github.com/Hayley96/CsvParserConsole/blob/main/GIF/FilePathMethodProgram.png)
 
 ### Restore Dependencies <a name="restoredependencies"></a>
 
@@ -93,8 +93,9 @@ Fork this repo to your Github and then clone the forked version of this repo.
 
 ### Running the Unit Tests <a name="runningtests"></a>
 
-- You can run the unit tests in Visual Studio, or you can go to your terminal and inside the root of this directory, run:
-  - `dotnet test`
+- You can run the unit tests in Visual Studio, or you can go to your terminal and inside the root of this directory [CsvParserConsole](./CsvParserConsole):
+ - run: `dotnet test`
+
 
 ### Main Entry Point <a name="mainentrypoint"></a>
 - The Main Entry Point for the application is: [Program.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Program.cs)
