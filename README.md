@@ -11,6 +11,10 @@ An .NET 6 Console app designed to Parse a file, query the file data, and return 
 3. [Pre-requisites](#prerequisites)
 4. [Getting Started](#gettingStarted)
    1. [Application Setup](#applicationsetup)
+   2. [Restore Dependencies](#restoredependencies)
+   3. [Run Application](#runapplication)
+   4. [Running Tests](#runningtests)
+   5. [Main Entry Point](#mainentrypoint)
 
 ## Introduction :wave: <a name="introduction"></a>
 An .NET 6 Console app designed to parse a CSV file and return records from different queries based on a pre-established set of criteria. 
@@ -79,5 +83,26 @@ Fork this repo to your Github and then clone the forked version of this repo.
 	- This application requires a path pointing to a csv file. By default the path is set using the 'Visual Studio Default Working Directory' and returning its great grand-parent directory. This now defaults to: [CsvParserConsoleAppDataDirectory](./CsvParserConsoleApp/Data)
 	 - If your 'Default Working Directory' is not set to application root '\bin\Debug\net6.0', then you will need to specify a new file path:
        - To change the filepath in the appliation, you will need to modify the path in the following file:
-	      * [ParserManagementController.cs](https://github.com/Hayley96/CsvParser/blob/main/CsvParserApp/Services/ParserManagementService.cs)
+	      * [ParserManagementController.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Controllers/ParserManagementController.cs)
 	      * ![ParserManagementControllerFilePath](https://github.com/Hayley96/CsvParserConsole/blob/main/GIF/FilePathMethod.png)
+
+### Restore Dependencies <a name="restoredependencies"></a>
+
+- Open up a terminal and navigate to the root folder of the main application directory [CsvParser](./CsvParserApp):
+ - run: `dotnet restore`
+
+### Run Application <a name="runapplication"></a>
+
+- You can run the application in Visual Studio, or you can go to your terminal and inside the root of this directory, run:
+ - run: `dotnet run`
+
+### Running the Unit Tests <a name="runningtests"></a>
+
+- You can run the unit tests in Visual Studio, or you can go to your terminal and inside the root of this directory, run:
+  - `dotnet test`
+
+### Main Entry Point <a name="mainentrypoint"></a>
+- The Main Entry Point for the application is: [Program.cs](https://github.com/Hayley96/CsvParserConsole/blob/main/CsvParserConsoleApp/Program.cs)
+
+
+## Thank you!! 👋
