@@ -1,5 +1,5 @@
 # :page_with_curl: CsvParserConsole
-An .NET 6 Console app designed to Parse a file, query the file data, and return records.
+A Console app designed to parse a file, query the file data, and return records.
 
 ![](https://github.com/Hayley96/CsvParserConsole/blob/main/GIF/CsvParserConsoleApp.gif)
 
@@ -17,7 +17,7 @@ An .NET 6 Console app designed to Parse a file, query the file data, and return 
    5. [Main Entry Point](#mainentrypoint)
 
 ## Introduction :wave: <a name="introduction"></a>
-An .NET 6 Console app designed to parse a CSV file and return records from different queries based on a pre-established set of criteria. 
+A .NET Console application designed to parse a CSV file and return records from different queries based on a pre-established set of criteria. 
 
 ## :computer: Application Overview <a name="applicationOverview"></a>
 
@@ -25,6 +25,7 @@ The application consists of the following main components:
 
 * CSV Parser
 * Data Query
+* View
 
 ### ⚒️ Technologies Used <a name="technologiesUsed"></a>
 
@@ -46,25 +47,25 @@ The application consists of the following main components:
 
 | Query                           | ReturnType     | Description                                                       |
 | :------------------------------ | :--------------| :-----------------------------------------------------------------|
-| `Get people from Derbyshire`    | `List<Person>` | returns a list of people who live in county Derbyshire            |
+| `Get people from Derbyshire`    | `List<Person>` | Returns a list of people who live in county Derbyshire            |
 
 #### Get all people where house number is three digits
 
 | Query                                               | ReturnType    | Description                                                       |
 | :---------------------------------------------------| :-------------| :-----------------------------------------------------------------|
-| `Get people whose house number is exactly 3 digits` | `List<Person>`| returns a list of people whose house number is exactly 3 digits   |
+| `Get people whose house number is exactly 3 digits` | `List<Person>`| Returns a list of people whose house number is exactly 3 digits   |
 
 #### Get all people whose web URL has more than 35 characters
 
 | Action                                                              | ReturnType    | Description                                                       |
 | :-------------------------------------------------------------------| :-------------| :-----------------------------------------------------------------|
-| `Get people whose website URL length is greater than 35 characters` | `List<Person>`| returns a list of people whose URL length > 35                    |
+| `Get people whose website URL length is greater than 35 characters` | `List<Person>`| Returns a list of people whose URL length > 35                    |
 
 #### Get all people whose postcode contains only one digit after the city code, example SE2
 
 | Action                                                        | ReturnType    | Description                                                       |
 | :-------------------------------------------------------------| :-------------| :-----------------------------------------------------------------|
-| `Get people who live in a postcode with a single digit value` | `List<Person>`| returns list of people whose postcode contains one digit          |
+| `Get people who live in a postcode with a single digit value` | `List<Person>`| Returns list of people whose postcode contains one digit          |
 
 
 ## Pre-requisites <a name="prerequisites"></a>
