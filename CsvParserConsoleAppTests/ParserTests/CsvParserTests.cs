@@ -1,7 +1,5 @@
 ﻿using CsvParserApp.Models;
-using CsvParserConsoleApp.Controllers;
 using CsvParserConsoleApp.Parser;
-using CsvParserConsoleApp.Services;
 using CsvParserConsoleAppTests.Data;
 using FluentAssertions;
 using Moq;
@@ -70,7 +68,7 @@ namespace CsvParserConsoleAppTests.ParserTests
             var result = _parser.MapValuesToTypeTProperties<Person>(lines[0], _delimeter, headers, props);
 
             Assert.That(result, Is.InstanceOf<Person>());
-            Assert.That(result.Firstname == "Aleshia");
+            Assert.That(result.Firstname, Is.EqualTo("Aleshia"));
         }
     }
 }

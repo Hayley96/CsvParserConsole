@@ -7,7 +7,7 @@ namespace CsvParserConsoleAppTests.ServicesTests
 {
     public class QueryServiceTests
     {
-        private QueryManagerService queryManagerService;
+        private Query queryManagerService;
         private List<Person> _ObjPeopleTestData;
 
         [SetUp]

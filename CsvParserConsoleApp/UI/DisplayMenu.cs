@@ -2,26 +2,30 @@
 {
     public static class DisplayMenu
     {
-        public static string PrintToScreen<T>(T DisplayText, Func<List<string>, string> queryOptionMethodToRun, List<string> listOptions)
+        public static string PrintMainMenu()
         {
+            return PrintToScreen("\rSelect Query To Run:", DisplayQueryOptions, MenuOptions.QueryOptions);
+        }
+        public static string PrintToScreen<T>(T DisplayText, Func<List<string>, string> menuOptionMethodToRun, List<string> listOptions)
+        {
+            Console.Clear();
             Console.Write($"\r{DisplayText}");
-            return queryOptionMethodToRun(listOptions);
+            var result = menuOptionMethodToRun(listOptions);
+            Console.Clear();
+            return result;
         }
 
         public static string DisplayQueryOptions(List<string> options)
         {
-            List<string> queryOptions = new();
-            foreach (var item in options)
-            {
-                AddToList(queryOptions, item);
-            }
-            return Menu.MultipleChoice(true, queryOptions);
+            return Menu.MultipleChoice(true, options);
         }
 
-        public static List<T> AddToList<T>(this List<T> list, T item)
+        public static bool ShowContinuePrompt()
         {
-            list.Add(item);
-            return list;
+            Console.WriteLine($"\nPress 'R' to run another query or any other key to exit......");
+            var continueOption = Console.ReadLine();
+
+            return continueOption!.Equals("R") ? true : false;
         }
     }
 }

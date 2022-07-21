@@ -5,6 +5,7 @@ namespace CsvParserConsoleApp.Parser
 {
     public class CsvParser : IParser
     {
+        private int _index = 1;
         public List<T> Parse<T>(List<string> fileData, string delimeter) where T : new()
         {
             List<T> list = new();
@@ -41,6 +42,8 @@ namespace CsvParserConsoleApp.Parser
                 prop.SetValue(obj, Convert.ChangeType(value, propertyType));
             });
 
+            if (obj!.GetType().GetProperty("ListPosition") != null)
+                obj!.GetType().GetProperty("ListPosition")!.SetValue(obj, _index++);
             return obj;
         }
     }
